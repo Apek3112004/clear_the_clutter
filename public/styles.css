@@ -1,0 +1,147 @@
+/* Basic reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Quicksand', sans-serif;
+}
+
+
+#progressFill {
+  height: 100%;
+  width: 0%;
+  background: #4caf50;
+  transition: width 0.3s ease;
+  border-radius: 10px;
+}
+
+body {
+  background:  linear-gradient(135deg, #74ebd5 0%, #ACB6E5 100%);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.container {
+  background: #fff;
+  padding: 30px 40px;
+  border-radius: 16px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+  max-width: 480px;
+  width: 100%;
+  text-align: center;
+}
+
+h1 {
+  margin-bottom: 24px;
+  color: #333;
+  font-weight: 700;
+  font-size: 32px;
+  position: relative;
+}
+
+form label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  text-align: left;
+  color: #444;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1.8px solid #ccc;
+  font-size: 16px;
+  margin-bottom: 16px;
+  transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus {
+  border-color: #66a6ff;
+  outline: none;
+  box-shadow: 0 0 8px rgba(102, 166, 255, 0.4);
+}
+
+button {
+  cursor: pointer;
+  background: #66a6ff;
+  color: white;
+  padding: 12px 24px;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background: #557efc;
+}
+
+.drop-zone {
+  margin: 24px 0;
+  padding: 30px 10px;
+  border: 3px dashed #66a6ff;
+  border-radius: 16px;
+  color: #66a6ff;
+  font-weight: 600;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.drop-zone.dragover {
+  background-color: #e6f0ff;
+  border-color: #557efc;
+}
+
+.actions {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.actions form button {
+  width: 140px;
+  font-size: 14px;
+}
+
+#preview-result {
+  margin-top: 24px;
+  text-align: left;
+  max-height: 250px;
+  overflow-y: auto;
+  border-radius: 12px;
+  padding: 15px 20px;
+  background: #f7f9fc;
+  box-shadow: inset 0 0 10px #d2e1ff;
+}
+
+#preview-result ul {
+  list-style-type: disc;
+  margin-left: 20px;
+}
+
+#preview-result h3 {
+  color: #333;
+  margin-bottom: 12px;
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 20px 20px;
+  }
+  button {
+    font-size: 14px;
+    padding: 10px 20px;
+  }
+  .actions {
+    flex-direction: column;
+    gap: 12px;
+  }
+  .actions form button {
+    width: 100%;
+  }
+}

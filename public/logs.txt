@@ -1,0 +1,26 @@
+➡️ Moved: 4-Tokenization+Example+Using+NLTK (1).ipynb → ipynb/4-Tokenization+Example+Using+NLTK (1).ipynb
+➡️ Moved: ALU4_MVM.pdf → pdf/ALU4_MVM.pdf
+➡️ Moved: ALU4_TVM.pdf → pdf/ALU4_TVM.pdf
+➡️ Moved: Apeksha_resume _Phonepe.pdf → pdf/Apeksha_resume _Phonepe.pdf
+➡️ Moved: Apeksha_resume.pdf → pdf/Apeksha_resume.pdf
+➡️ Moved: Buffer-Management-System-main (1).zip → zip/Buffer-Management-System-main (1).zip
+➡️ Moved: Buffer-Management-System-main.zip → zip/Buffer-Management-System-main.zip
+➡️ Moved: Fresher - QA Engineer JD - v1.0.pdf → pdf/Fresher - QA Engineer JD - v1.0.pdf
+➡️ Moved: Modern Professional CV Resume (1).pdf → pdf/Modern Professional CV Resume (1).pdf
+➡️ Moved: Modern Professional CV Resume.pdf → pdf/Modern Professional CV Resume.pdf
+➡️ Moved: Naveen_Kommuri_Resume.pdf → pdf/Naveen_Kommuri_Resume.pdf
+➡️ Moved: OS_Full_Notes.pdf → pdf/OS_Full_Notes.pdf
+➡️ Moved: Prathamesh_Bedakar_Resume (1).pdf → pdf/Prathamesh_Bedakar_Resume (1).pdf
+↩️ Undid: Prathamesh_Bedakar_Resume (1).pdf moved back
+↩️ Undid: OS_Full_Notes.pdf moved back
+↩️ Undid: Naveen_Kommuri_Resume.pdf moved back
+↩️ Undid: Modern Professional CV Resume.pdf moved back
+↩️ Undid: Modern Professional CV Resume (1).pdf moved back
+↩️ Undid: Fresher - QA Engineer JD - v1.0.pdf moved back
+↩️ Undid: Buffer-Management-System-main.zip moved back
+↩️ Undid: Buffer-Management-System-main (1).zip moved back
+↩️ Undid: Apeksha_resume.pdf moved back
+↩️ Undid: Apeksha_resume _Phonepe.pdf moved back
+↩️ Undid: ALU4_TVM.pdf moved back
+↩️ Undid: ALU4_MVM.pdf moved back
+↩️ Undid: 4-Tokenization+Example+Using+NLTK (1).ipynb moved back
