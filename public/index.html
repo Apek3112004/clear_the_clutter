@@ -29,7 +29,28 @@
 
     <form id="organizeForm" action="/organize" method="POST" style="display: none;">
   <input type="hidden" id="hiddenBasepath" name="basepath" />
-  <button type="submit">Confirm Organize</button>
+ 
+  <section class="customization">
+  <h3>Customize Organizing</h3>
+
+  <label>
+    Exclude extensions (comma separated):
+    <input type="text" id="excludeExt" placeholder="e.g. tmp,log" />
+  </label>
+
+  <label>
+    Custom folder rules (format: ext=folder, comma separated):
+    <input type="text" id="customFolders" placeholder="e.g. png=Screenshots, mp3=Music" />
+  </label>
+
+  <label>
+    <input type="checkbox" id="copyInstead" />
+    Copy files instead of moving
+  </label>
+
+   <button type="submit">Confirm Organize</button>
+</section>
+
 </form>
 
 
@@ -45,100 +66,8 @@
     <div id="preview-result"></div>
   </div>
 
-  <script>
-    const pathForm = document.getElementById("pathForm");
-    const organizeForm = document.getElementById("organizeForm");
-    const hiddenBasepath = document.getElementById("hiddenBasepath");
-    const previewResult = document.getElementById("preview-result");
-    const dropZone = document.getElementById("drop-zone");
-
-    // Handle preview form submit
-    pathForm.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      const basepath = document.getElementById("basepath").value.trim();
-
-      if (!basepath) return alert("Please enter a folder path.");
-
-      previewResult.innerHTML = "<p>Loading preview...</p>";
-
-      try {
-        const response = await fetch("/preview", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ basepath }),
-        });
-
-        if (!response.ok) throw new Error(await response.text());
-
-        const previewFiles = await response.json();
-
-        if (previewFiles.length === 0) {
-          previewResult.innerHTML = "<p>No files to organize or only js/json files present.</p>";
-          organizeForm.style.display = "none";
-          return;
-        }
-
-        // Show preview
-        previewResult.innerHTML = "<h3>Preview of files to be organized:</h3>";
-        const ul = document.createElement("ul");
-        previewFiles.forEach(({ file, targetFolder }) => {
-          const li = document.createElement("li");
-          li.textContent = `${file} → ${targetFolder}/`;
-          ul.appendChild(li);
-        });
-        previewResult.appendChild(ul);
-
-        // Show organize form with hidden path
-        hiddenBasepath.value = basepath;
-        organizeForm.style.display = "block";
-      } catch (error) {
-        previewResult.innerHTML = `<p style="color:red;">Error: ${error.message}</p>`;
-        organizeForm.style.display = "none";
-      }
-    });
-
-    // Drag and drop folder path (folder drag not fully supported on web browsers for paths)
-    dropZone.addEventListener("dragover", (e) => {
-      e.preventDefault();
-      dropZone.classList.add("dragover");
-    });
-
-    dropZone.addEventListener("dragleave", (e) => {
-      e.preventDefault();
-      dropZone.classList.remove("dragover");
-    });
-
-    dropZone.addEventListener("drop", (e) => {
-      e.preventDefault();
-      dropZone.classList.remove("dragover");
-
-      // NOTE: Browsers don't allow getting full local path for folders due to security
-      // So this is mostly useful in Electron or desktop apps.
-      // For demo, we extract folder name from dropped files (hacky)
-      const items = e.dataTransfer.items;
-      if (items.length > 0) {
-        let folderPath = null;
-        for (let i = 0; i < items.length; i++) {
-          const item = items[i].webkitGetAsEntry();
-          if (item && item.isDirectory) {
-            folderPath = item.name; // This is just folder name, not full path
-            break;
-          }
-        }
-        if (!folderPath) folderPath = items[0].getAsFile().path || "";
-       dropZone.addEventListener("drop", (e) => {
-  e.preventDefault();
-  dropZone.classList.remove("dragover");
-  // Remove alert and add message below the drop zone
-  const msg = document.createElement("p");
-  msg.style.color = "orange";
-  msg.textContent =
-    "⚠️ Folder drag & drop is limited in browsers. Please copy-paste the folder path instead.";
-  dropZone.appendChild(msg);
-});
-
-      }
-    });
+  <script src="./file.js">
   </script>
+
 </body>
 </html>

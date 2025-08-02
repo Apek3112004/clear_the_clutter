@@ -14,6 +14,8 @@ app.use(express.static("public"));
 let lastMoved = [];
 let logs = [];
 
+
+
 // Helper to hash files for duplicate detection
 async function getFileHash(filePath) {
   return new Promise((resolve, reject) => {
@@ -64,11 +66,14 @@ app.post("/preview", async (req, res) => {
       const fullPath = path.join(basepath, item);
       const stat = await fs.lstat(fullPath);
       if (stat.isDirectory()) continue;
-      const extension = path.extname(item).slice(1);
+      const extension = path.extname(item).slice(1).toLowerCase();
 
-      if (extension && extension !== "js" && extension !== "json") {
-        preview.push({ file: item, targetFolder: extension });
-      }
+if (extension && extension !== "js" && extension !== "json") {
+  const customFolders = req.body.customFolders || {};
+  const targetFolder = customFolders[extension] || extension;
+  preview.push({ file: item, targetFolder });
+}
+
     }
 
     res.json(preview);
@@ -77,9 +82,21 @@ app.post("/preview", async (req, res) => {
   }
 });
 
+
+
 // Organize files and remove duplicates
 app.post("/organize", async (req, res) => {
-  const basepath = req.body.basepath;
+  /*
+  Expect body:
+  {
+    basepath: string,
+    excludeExt: string[], // e.g. ['tmp','log']
+    customFolders: { [ext]: folderName },
+    copyInstead: boolean
+  }
+  */
+
+  const { basepath, excludeExt = [], customFolders = {}, copyInstead = false } = req.body;
   logs = [];
   lastMoved = [];
   const seenHashes = new Map();
@@ -98,56 +115,65 @@ app.post("/organize", async (req, res) => {
       }
       if (stat.isDirectory()) continue;
 
-      const extension = path.extname(item).slice(1);
+      const extension = path.extname(item).slice(1).toLowerCase();
 
-      if (extension && extension !== "js" && extension !== "json") {
-        let hash;
+      if (!extension || excludeExt.includes(extension) || extension === "js" || extension === "json") {
+        continue;
+      }
+
+      let hash;
+      try {
+        hash = await getFileHash(itemPath);
+      } catch (err) {
+        console.error(`Error hashing file ${item}:`, err);
+        continue;
+      }
+
+      if (seenHashes.has(hash)) {
         try {
-          hash = await getFileHash(itemPath);
+          await fs.unlink(itemPath);
+          logs.push(`🗑️ Deleted duplicate: ${item}`);
         } catch (err) {
-          console.error(`Error hashing file ${item}:`, err);
-          continue;
+          console.error(`Error deleting duplicate file ${item}:`, err);
         }
+        continue;
+      }
+      seenHashes.set(hash, itemPath);
 
-        if (seenHashes.has(hash)) {
-          try {
-            await fs.unlink(itemPath);
-            logs.push(`🗑️ Deleted duplicate: ${item}`);
-          } catch (err) {
-            console.error(`Error deleting duplicate file ${item}:`, err);
-          }
-          continue;
+      // Decide target folder:
+      let targetFolder = customFolders[extension] || extension;
+      const extDir = path.join(basepath, targetFolder);
+
+      try {
+        if (!fsn.existsSync(extDir)) {
+          await fs.mkdir(extDir);
+          logs.push(`📁 Created folder: ${targetFolder}`);
         }
+      } catch (err) {
+        console.error(`Error creating directory ${extDir}:`, err);
+        continue;
+      }
 
-        seenHashes.set(hash, itemPath);
+      const destPath = path.join(extDir, item);
 
-        const extDir = path.join(basepath, extension);
-        try {
-          if (!fsn.existsSync(extDir)) {
-            await fs.mkdir(extDir);
-            logs.push(`📁 Created folder: ${extension}`);
-          }
-        } catch (err) {
-          console.error(`Error creating directory ${extDir}:`, err);
-          continue;
-        }
-
-        const destPath = path.join(extDir, item);
-
-        try {
+      try {
+        if (copyInstead) {
+          await fs.copyFile(itemPath, destPath);
+          logs.push(`📋 Copied: ${item} → ${targetFolder}/${item}`);
+        } else {
           await fs.rename(itemPath, destPath);
-          logs.push(`➡️ Moved: ${item} → ${extension}/${item}`);
+          logs.push(`➡️ Moved: ${item} → ${targetFolder}/${item}`);
           lastMoved.push({ from: destPath, to: itemPath });
-        } catch (err) {
-          console.error(`Error moving file ${item}:`, err);
         }
+      } catch (err) {
+        console.error(`Error processing file ${item}:`, err);
       }
     }
 
     // 🧹 Clean up empty folders
     await deleteEmptyFolders(basepath);
 
-    res.sendFile(path.join(process.cwd(), "public", "done.html"));
+    res.json({ message: "Organizing complete", logs });
   } catch (err) {
     console.error("Error during organizing:", err);
     res.status(500).send("Error: " + err.message);
@@ -180,6 +206,8 @@ app.post("/undo", async (req, res) => {
     res.status(500).send("Undo failed: " + err.message);
   }
 });
+
+
 
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);
