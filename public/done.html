@@ -4,10 +4,16 @@
   <meta charset="UTF-8" />
   <title>Operation Complete - Clutter Clear</title>
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet" />
-  <link href="./done.css" rel="stylesheet">
-   
+  <link href="./done.css" rel="stylesheet" />
 </head>
 <body>
+
+  <!-- Floating balloons -->
+  <div class="balloon"></div>
+  <div class="balloon"></div>
+  <div class="balloon"></div>
+  <div class="balloon"></div>
+
   <canvas id="confetti-canvas"></canvas>
 
   <div class="container">
@@ -21,7 +27,35 @@
     <a href="/">Go Back</a>
   </div>
 
+  <!-- Success Modal -->
+  <div id="successModalOverlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-describedby="modalDesc">
+    <div id="successModal">
+      <h2 id="modalTitle">Success!</h2>
+      <p id="modalDesc">Your files have been organized successfully.</p>
+      <button id="closeModalBtn" aria-label="Close success message">Close</button>
+    </div>
+  </div>
+
   <script>
+    // Show the modal on page load
+    window.addEventListener("load", () => {
+      const modalOverlay = document.getElementById('successModalOverlay');
+      const closeBtn = document.getElementById('closeModalBtn');
+
+      // Show modal
+      modalOverlay.classList.add('show');
+
+      // Close modal handler
+      function closeModal() {
+        modalOverlay.classList.remove('show');
+      }
+
+      closeBtn.addEventListener('click', closeModal);
+
+      // Optional: auto close modal after 5 seconds
+      setTimeout(closeModal, 5000);
+    });
+
     // Simple confetti effect
     (() => {
       const canvas = document.getElementById('confetti-canvas');

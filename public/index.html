@@ -1,18 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Clutter Clear</title>
+
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/styles.css" />
 </head>
+
 <body>
+
   <div class="container">
+
     <h1>Clutter Clear</h1>
+
 
     <form id="pathForm">
       <label for="basepath">Enter folder path:</label>
+
       <input
         type="text"
         id="basepath"
@@ -20,54 +27,111 @@
         placeholder="C:\\Users\\YourName\\Desktop\\folder"
         required
       />
+
       <button type="submit">Preview</button>
     </form>
+
 
     <div id="drop-zone" class="drop-zone">
       <p>Or drag and drop a folder here</p>
     </div>
 
+
     <form id="organizeForm" action="/organize" method="POST" style="display: none;">
-  <input type="hidden" id="hiddenBasepath" name="basepath" />
- 
-  <section class="customization">
-  <h3>Customize Organizing</h3>
 
-  <label>
-    Exclude extensions (comma separated):
-    <input type="text" id="excludeExt" placeholder="e.g. tmp,log" />
-  </label>
+      <input type="hidden" id="hiddenBasepath" name="basepath" />
 
-  <label>
-    Custom folder rules (format: ext=folder, comma separated):
-    <input type="text" id="customFolders" placeholder="e.g. png=Screenshots, mp3=Music" />
-  </label>
 
-  <label>
-    <input type="checkbox" id="copyInstead" />
-    Copy files instead of moving
-  </label>
+      <section class="customization">
 
-   <button type="submit">Confirm Organize</button>
-</section>
+        <h3>Customize Organizing</h3>
 
-</form>
+
+        <label>
+          Exclude extensions (comma separated):
+          <input type="text" id="excludeExt" placeholder="e.g. tmp,log" />
+        </label>
+
+
+        <label>
+          Custom folder rules (format: ext=folder, comma separated):
+          <input type="text" id="customFolders" placeholder="e.g. png=Screenshots, mp3=Music" />
+        </label>
+
+
+        <label>
+          <input type="checkbox" id="copyInstead" />
+          Copy files instead of moving
+        </label>
+
+
+        <!-- PROGRESS BAR CONTAINER -->
+        <div id="progress-container" style="display:none; margin-top: 15px;">
+          <div id="progress-bar" style="
+            height: 20px;
+            background-color: #4caf50;
+            width: 0%;
+            border-radius: 5px;
+            transition: width 0.3s ease;
+          "></div>
+
+          <p id="progress-text" style="margin-top: 5px; font-weight: 500;"></p>
+        </div>
+
+
+        <button type="submit">Confirm Organize</button>
+
+      </section>
+    </form>
 
 
     <div class="actions">
+
       <form action="/undo" method="POST" style="display: inline;">
         <button type="submit">Undo Last Operation</button>
       </form>
+
       <form action="/download-logs" method="GET" style="display: inline;">
         <button type="submit">Download Logs</button>
       </form>
+
     </div>
 
+
+    <!-- Progress container -->
+    <div id="progress-container" style="display:none; margin-top: 20px;">
+
+      <div style="background: #eee; border-radius: 10px; overflow: hidden; height: 25px; width: 100%;">
+        <div id="progress-bar" style="height: 25px; width: 0%; background: #4caf50; transition: width 0.3s ease;"></div>
+      </div>
+
+      <p id="progress-text" style="margin-top: 8px; font-weight: 600;"></p>
+
+
+      <!-- Summary of organizing stats -->
+      <div id="organize-summary" style="display:none; margin-top: 15px; text-align:left; font-size: 0.9rem; background: #f9f9f9; border-radius: 10px; padding: 12px; color: #333;">
+
+        <h4>Summary:</h4>
+
+        <ul style="list-style: none; padding-left: 0;">
+          <li id="summary-moved"></li>
+          <li id="summary-copied"></li>
+          <li id="summary-duplicates"></li>
+          <li id="summary-bytes"></li>
+        </ul>
+
+      </div>
+
+    </div>
+
+
     <div id="preview-result"></div>
+
   </div>
 
-  <script src="./file.js">
-  </script>
+
+  <script src="./file.js"></script>
 
 </body>
+
 </html>
