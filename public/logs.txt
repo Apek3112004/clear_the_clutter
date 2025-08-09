@@ -1,12 +1,16 @@
+➡️ Moved: ALU4_MVM.pdf → pdf/ALU4_MVM.pdf
+➡️ Moved: ALU4_TVM.pdf → pdf/ALU4_TVM.pdf
+➡️ Moved: Buffer-Management-System-main (1).zip → zip/Buffer-Management-System-main (1).zip
+➡️ Moved: Buffer-Management-System-main.zip → zip/Buffer-Management-System-main.zip
 ➡️ Moved: essay.pdf → pdf/essay.pdf
-📁 Created folder: txt
-➡️ Moved: logs (1).txt → txt/logs (1).txt
-➡️ Moved: logs (2).txt → txt/logs (2).txt
-🗑️ Deleted duplicate: logs (3).txt
-➡️ Moved: logs (4).txt → txt/logs (4).txt
-➡️ Moved: logs.txt → txt/logs.txt
-↩️ Undid: logs.txt moved back
-↩️ Undid: logs (4).txt moved back
-↩️ Undid: logs (2).txt moved back
-↩️ Undid: logs (1).txt moved back
+➡️ Moved: Fresher - QA Engineer JD - v1.0.pdf → pdf/Fresher - QA Engineer JD - v1.0.pdf
+➡️ Moved: OS_Full_Notes.pdf → pdf/OS_Full_Notes.pdf
+➡️ Moved: voice.pdf → pdf/voice.pdf
+↩️ Undid: voice.pdf moved back
+↩️ Undid: OS_Full_Notes.pdf moved back
+↩️ Undid: Fresher - QA Engineer JD - v1.0.pdf moved back
 ↩️ Undid: essay.pdf moved back
+↩️ Undid: Buffer-Management-System-main.zip moved back
+↩️ Undid: Buffer-Management-System-main (1).zip moved back
+↩️ Undid: ALU4_TVM.pdf moved back
+↩️ Undid: ALU4_MVM.pdf moved back
