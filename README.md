@@ -1,4 +1,4 @@
-# Clutter Updated
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/17082e3d-66dc-44c5-b31e-3e5144f9c1c1" /># Clutter Updated
 
 This is a file organization application built with Electron.js, Node.js, and Express.js.
 
@@ -27,3 +27,8 @@ This is a file organization application built with Electron.js, Node.js, and Exp
 
 ### Undone Operation
 ![A screenshot confirming that the last operation has been undone.](undid.png)
+
+
+###Downloaded logs
+![](Screenshot (1384).png)
+
