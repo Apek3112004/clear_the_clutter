@@ -22,10 +22,6 @@ This is a file organization application built with Electron.js, Node.js, and Exp
 ### Organized folder 
 ![A screenshot of the undo button being clicked.](organized_files.png)
 
-
-### Downloaded logs:-
-![A screenshot confirming that the last operation has been undone.](logs.png)
-
 ### Undone Operation
 ![A screenshot confirming that the last operation has been undone.](undid.png)
 
