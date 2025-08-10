@@ -19,9 +19,6 @@ This is a file organization application built with Electron.js, Node.js, and Exp
 ### And look at the preview 
 ![A screenshot of the success alert after the operation is complete.](preview_shown.png)
 
-### To see the app running successfully
-![A screenshot of the undo button being clicked.](success_alert.png)
-
 ### Organized folder 
 ![A screenshot of the undo button being clicked.](organized_files.png)
 
