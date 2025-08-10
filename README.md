@@ -5,22 +5,25 @@ This is a file organization application built with Electron.js, Node.js, and Exp
 ## Walk through:-
 
 ### Main User Interface
-![A screenshot of the application's main interface.](main.png)
+![A screenshot of the application's main interface.](UI.png)
 
-### Customization Options
-![A screenshot showing the customization options for organizing files.](customization.png)
+### These are the files which are to be organized .You can copy and paste the path of the folder 
+![Folder](file_to_organize.png)
 
-### Drag and Drop
+### Lets paste in the path
 ![A screenshot demonstrating the drag-and-drop functionality.](path_pasted.png)
 
-### Preview
-![A screenshot of the preview functionality, showing which files will be organized.](preview_shown.png)
+### And do some customization
+![A screenshot of the preview functionality, showing which files will be organized.](customization.png)
 
-### Success Alert
-![A screenshot of the success alert after the operation is complete.](success_alert.png)
+### And look at the preview 
+![A screenshot of the success alert after the operation is complete.](preview_shown.png)
 
-### Undo Functionality
-![A screenshot of the undo button being clicked.](undo_clicked.png)
+### To see the app running successfully
+![A screenshot of the undo button being clicked.](success_alert.png)
+
+### Organized folder 
+![A screenshot of the undo button being clicked.](organized_files.png)
 
 ### Undone Operation
 ![A screenshot confirming that the last operation has been undone.](undid.png)
