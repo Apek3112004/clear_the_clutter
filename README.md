@@ -29,5 +29,5 @@ This is a file organization application built with Electron.js, Node.js, and Exp
 ![A screenshot confirming that the last operation has been undone.](undid.png)
 
 ###Downloaded logs:-
-![Logs here](Screenshot (1384).png)
+![A screenshot confirming that the last operation has been undone.](logs.png)
 
